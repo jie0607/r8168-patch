@@ -3,5 +3,6 @@ When installing the official Realtek r8168 driver, some versions of Linux OS may
 
 [RHEL]
 - RHEL9.6: r8168_driver_compilation_rhel9.6.patch
+
 [SUSE]
 - SLES15 SP7: r8168_driver_compilation_sles15sp7.patch
