@@ -1,0 +1,44 @@
+diff --git a/src/r8168.h b/src/r8168.h
+index 672900c..fc25735 100755
+--- a/src/r8168.h
++++ b/src/r8168.h
+@@ -423,7 +423,7 @@ do { \
+ #define  MDIO_EEE_1000T  0x0004
+ #endif
+ 
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(6,9,0)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6,3,0)
+ #define ethtool_keee ethtool_eee
+ #define rtl8168_ethtool_adv_to_mmd_eee_adv_cap1_t ethtool_adv_to_mmd_eee_adv_t
+ #else
+diff --git a/src/r8168_n.c b/src/r8168_n.c
+index 01128a8..3803a1c 100755
+--- a/src/r8168_n.c
++++ b/src/r8168_n.c
+@@ -7981,7 +7981,7 @@ rtl8168_device_lpi_t_to_ethtool_lpi_t(struct rtl8168_private *tp , u32 lpi_timer
+         return to_us;
+ }
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,9,0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,4,0)
+ static void
+ rtl8168_adv_to_linkmode(unsigned long *mode, u64 adv)
+ {
+@@ -8282,7 +8282,7 @@ static const struct ethtool_ops rtl8168_ethtool_ops = {
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,5,0)
+         .get_ts_info        = ethtool_op_get_ts_info,
+ #endif //LINUX_VERSION_CODE >= KERNEL_VERSION(3,5,0)
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,4,0)
+         .get_eee = rtl_ethtool_get_eee,
+         .set_eee = rtl_ethtool_set_eee,
+ #endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0) */
+@@ -26835,7 +26835,7 @@ err1:
+                 struct ethtool_keee *eee = &tp->eee;
+ 
+                 eee->eee_enabled = eee_enable;
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(6,9,0)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6,3,0)
+                 eee->supported  = SUPPORTED_100baseT_Full |
+                                   SUPPORTED_1000baseT_Full;
+                 eee->advertised = mmd_eee_adv_to_ethtool_adv_t(MDIO_EEE_1000T | MDIO_EEE_100TX);
